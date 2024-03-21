@@ -1,0 +1,123 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="bg-primary">
+                <h2>Template driven forms</h2>
+            </div>
+            <form #newForm="ngForm" (ngSubmit)="save(newForm)" novalidate>
+                {{newForm.value | json}}
+                <hr>
+                {{std | json}}
+                <hr>
+                <div class="form-group">
+                    <label for="">Enter name:</label>
+                    <input type="text" minlength="3" maxlength="10" [class.is-invalid]="name.touched && name.invalid" required #name="ngModel" name="name" [(ngModel)]="std.name" class="form-control " placeholeder="Enter your name " ngModel>
+                </div>
+                <br>
+                <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+                    <div *ngIf="name.errors && name.errors['required']">
+                        Name is required
+                    </div>
+                    <div *ngIf="name.errors && name.errors['minlength']">
+                        3 characters must
+                    </div>
+                </div>
+                <!-- touched={{name.touched}}
+                <br>
+                un-touched={{name.untouched}} -->
+                <div class="form-group">
+                    <label for="">Enter age:</label>
+                    <input type="number" min="10" max="80" [class.is-invalid]="age.touched && age.invalid" required #age="ngModel" name="age" class="form-control" [(ngModel)]="std.age" placeholeder="Enter your age " ngModel>
+                </div>
+                <br>
+                <div class="alert alert-danger" *ngIf="age.touched && age.invalid">
+                    <div *ngIf="age.errors && age.errors['required']">
+                        age is required
+                    </div>
+                    <div *ngIf="age.errors && age.errors['min']">
+                        must greater than 10
+                    </div>
+                    <div *ngIf="age.errors && age.errors['max']">
+                        must less than 80
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Enter email:</label>
+                    <input type="text" [class.is-invalid]="email.touched && email.invalid" required pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$" #email="ngModel" name="email" class="form-control" [(ngModel)]="std.email" placeholeder="Enter your email " ngModel>
+                </div>
+                <br>
+                <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
+                    <div *ngIf="email.errors && email.errors['required']">
+                        email is required
+                    </div>
+                    <div *ngIf="email.errors && email.errors['pattern']">
+                        Invalid email
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Enter :</label>
+                    <input type="password" [class.is-invalid]="pass.touched && pass.invalid" required pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" #pass="ngModel" name="pass" class="form-control" [(ngModel)]="std.pass" placeholeder="Enter your password " ngModel>
+                </div>
+                <br>
+                <div class="alert alert-danger" *ngIf="pass.touched && pass.invalid">
+                    <div *ngIf="pass.errors && pass.errors['required']">
+                        password is required
+                    </div>
+                    <div *ngIf="pass.errors && pass.errors['pattern']">
+                        Invalid password
+                    </div>
+                </div>
+                
+                <label>Gender</label>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" required value="Male" #gender="ngModel" [(ngModel)]="std.gender" name="gender" ngModel>
+                    <label for="">Male</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" required value="Female" #gender="ngModel" [(ngModel)]="std.gender" name="gender" ngModel>
+                    <label for="">Female</label>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Country</label>
+                    <select name="country" class="form-control" required [class.is-invalid]="country.touched && country.invalid" #country="ngModel" [(ngModel)]="std.country" ngModel>
+                        <option value="" selected>Select</option>
+                        <option value="India">India</option>
+                        <option value="USA">USA</option>
+                        <option value="Canada">Canada</option>
+                    </select>
+                </div>
+                <br>
+                <div class="form-check">
+                    <input type="checkbox" name="accept" class="form-check-input" #accept="ngModel" ngModel [(ngModel)]="std.accept" required>
+                    <label>I accept terms & conditions.</label>
+                </div>
+                <br>
+                <label>Select hobbies</label>
+                <div class="form-check">
+                    <input type="checkbox" (change)="onChange($event)" name="hobbies" class="form-check-input" value="Singing" ngModel>
+                    <label>Singing</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" (change)="onChange($event)" name="hobbies" class="form-check-input" value="Dancing" ngModel>
+                    <label>Dancing</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" (change)="onChange($event)" name="hobbies" class="form-check-input" value="Playing" ngModel>
+                    <label>Playing</label>
+                </div>
+
+                <br>
+                <div class="d-grid">
+                    <input type="submit" [class.disabled]="newForm.form.invalid || selectedHobbies.length==0" value="submit" class="btn btn-primary">
+                    <br>
+                    <button type="button" class="btn btn-danger" (click)="resetForm(newForm)">Reset</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
