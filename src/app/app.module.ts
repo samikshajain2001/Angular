@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { TwowayComponent } from './twoway/twoway.component';
@@ -12,6 +12,7 @@ import { StudentListComponent } from './student-list/student-list.component';
 import { StudentServiceService } from './services/student-service.service';
 import {HttpClientModule} from '@angular/common/http';
 import { TdfComponent } from './tdf/tdf.component';
+import { ChangeMeDirective } from './shared/change-me.directive';
 
 @NgModule({
   declarations: [
@@ -23,10 +24,12 @@ import { TdfComponent } from './tdf/tdf.component';
     PipesComponent,
     CustomPipe,
     StudentListComponent,
-    TdfComponent
+    TdfComponent,
+    ChangeMeDirective
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     FormsModule,
     HttpClientModule
   ],
